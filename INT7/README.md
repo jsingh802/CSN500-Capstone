@@ -1,7 +1,7 @@
-# AUTHENTICATING WITH SSH
+# Authenticating with ssh
 
 ```bash
 Name = Jaskirat Singh
-Student ID = 166800193
+StudentID = 166800193
 Email = jsingh802@myseneca.ca
 ```
