@@ -5,6 +5,14 @@
         "virtualNetworks_Router_71_name": {
             "defaultValue": "Router-71",
             "type": "String"
+        },
+        "virtualNetworks_Server_71_externalid": {
+            "defaultValue": "/subscriptions/e22a2bd0-d760-4866-9918-1c98f501eb6a/resourceGroups/Student-RG-634460/providers/Microsoft.Network/virtualNetworks/Server-71",
+            "type": "String"
+        },
+        "virtualNetworks_Student_634460_vnet_externalid": {
+            "defaultValue": "/subscriptions/e22a2bd0-d760-4866-9918-1c98f501eb6a/resourceGroups/Student-RG-634460/providers/Microsoft.Network/virtualNetworks/Student-634460-vnet",
+            "type": "String"
         }
     },
     "variables": {},
@@ -15,8 +23,8 @@
             "name": "[parameters('virtualNetworks_Router_71_name')]",
             "location": "canadaeast",
             "tags": {
-                "DeploymentId": "634489",
-                "LaunchId": "23583",
+                "DeploymentId": "634460",
+                "LaunchId": "23582",
                 "LaunchType": "ON_DEMAND_LAB",
                 "TemplateId": "4678",
                 "TenantId": "353"
@@ -65,7 +73,44 @@
                         }
                     }
                 ],
-                "virtualNetworkPeerings": [],
+                "virtualNetworkPeerings": [
+                    {
+                        "name": "Router71-Server71",
+                        "properties": {
+                            "peeringState": "Connected",
+                            "remoteVirtualNetwork": {
+                                "id": "[parameters('virtualNetworks_Server_71_externalid')]"
+                            },
+                            "allowVirtualNetworkAccess": true,
+                            "allowForwardedTraffic": true,
+                            "allowGatewayTransit": false,
+                            "useRemoteGateways": false,
+                            "remoteAddressSpace": {
+                                "addressPrefixes": [
+                                    "172.17.71.0/24"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "Router71-Student634460",
+                        "properties": {
+                            "peeringState": "Connected",
+                            "remoteVirtualNetwork": {
+                                "id": "[parameters('virtualNetworks_Student_634460_vnet_externalid')]"
+                            },
+                            "allowVirtualNetworkAccess": true,
+                            "allowForwardedTraffic": true,
+                            "allowGatewayTransit": false,
+                            "useRemoteGateways": false,
+                            "remoteAddressSpace": {
+                                "addressPrefixes": [
+                                    "10.43.156.0/24"
+                                ]
+                            }
+                        }
+                    }
+                ],
                 "enableDdosProtection": false
             }
         },
@@ -123,6 +168,52 @@
                 "delegations": [],
                 "privateEndpointNetworkPolicies": "Enabled",
                 "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('virtualNetworks_Router_71_name'), '/Router71-Server71')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_Router_71_name'))]"
+            ],
+            "properties": {
+                "peeringState": "Connected",
+                "remoteVirtualNetwork": {
+                    "id": "[parameters('virtualNetworks_Server_71_externalid')]"
+                },
+                "allowVirtualNetworkAccess": true,
+                "allowForwardedTraffic": true,
+                "allowGatewayTransit": false,
+                "useRemoteGateways": false,
+                "remoteAddressSpace": {
+                    "addressPrefixes": [
+                        "172.17.71.0/24"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('virtualNetworks_Router_71_name'), '/Router71-Student634460')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_Router_71_name'))]"
+            ],
+            "properties": {
+                "peeringState": "Connected",
+                "remoteVirtualNetwork": {
+                    "id": "[parameters('virtualNetworks_Student_634460_vnet_externalid')]"
+                },
+                "allowVirtualNetworkAccess": true,
+                "allowForwardedTraffic": true,
+                "allowGatewayTransit": false,
+                "useRemoteGateways": false,
+                "remoteAddressSpace": {
+                    "addressPrefixes": [
+                        "10.43.156.0/24"
+                    ]
+                }
             }
         }
     ]
