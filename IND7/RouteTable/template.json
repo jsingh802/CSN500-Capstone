@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "routeTables_RT_xxx_name": {
+            "defaultValue": "RT-xxx",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('routeTables_RT_xxx_name')]",
+            "location": "canadaeast",
+            "tags": {
+                "DeploymentId": "634489",
+                "LaunchId": "23583",
+                "LaunchType": "ON_DEMAND_LAB",
+                "TemplateId": "4678",
+                "TenantId": "353"
+            },
+            "properties": {
+                "disableBgpRoutePropagation": false,
+                "routes": []
+            }
+        }
+    ]
+}
