@@ -2,8 +2,8 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "routeTables_RT_xxx_name": {
-            "defaultValue": "RT-xxx",
+        "routeTables_RT_71_name": {
+            "defaultValue": "RT-71",
             "type": "String"
         }
     },
@@ -12,18 +12,65 @@
         {
             "type": "Microsoft.Network/routeTables",
             "apiVersion": "2020-11-01",
-            "name": "[parameters('routeTables_RT_xxx_name')]",
+            "name": "[parameters('routeTables_RT_71_name')]",
             "location": "canadaeast",
             "tags": {
-                "DeploymentId": "634489",
-                "LaunchId": "23583",
+                "DeploymentId": "634460",
+                "LaunchId": "23582",
                 "LaunchType": "ON_DEMAND_LAB",
                 "TemplateId": "4678",
                 "TenantId": "353"
             },
             "properties": {
-                "disableBgpRoutePropagation": false,
-                "routes": []
+                "disableBgpRoutePropagation": true,
+                "routes": [
+                    {
+                        "name": "RT1",
+                        "properties": {
+                            "addressPrefix": "172.17.71.32/27",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "192.168.71.36",
+                            "hasBgpOverride": false
+                        }
+                    },
+                    {
+                        "name": "RT2",
+                        "properties": {
+                            "addressPrefix": "10.43.156.0/24",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIpAddress": "192.168.71.36",
+                            "hasBgpOverride": false
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('routeTables_RT_71_name'), '/RT1')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables_RT_71_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "172.17.71.32/27",
+                "nextHopType": "VirtualAppliance",
+                "nextHopIpAddress": "192.168.71.36",
+                "hasBgpOverride": false
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables/routes",
+            "apiVersion": "2020-11-01",
+            "name": "[concat(parameters('routeTables_RT_71_name'), '/RT2')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/routeTables', parameters('routeTables_RT_71_name'))]"
+            ],
+            "properties": {
+                "addressPrefix": "10.43.156.0/24",
+                "nextHopType": "VirtualAppliance",
+                "nextHopIpAddress": "192.168.71.36",
+                "hasBgpOverride": false
             }
         }
     ]

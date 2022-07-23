@@ -19,7 +19,8 @@ echo "Creating Routes"
 az network route-table route create -g $RG_Name --route-table-name $RT_Name -n "Route-Server" \
     --next-hop-type VirtualAppliance --address-prefix $Server_SN1 --next-hop-ip-address $Virtual_Appliance
 # --> Your Code in here
-
+az network route-table route create -g $RG_Name --route-table-name $RT_Name -n "Route-Student" \
+    --next-hop-type VirtualAppliance --address-prefix $Virtual_Desktop --next-hop-ip-address $Virtual_Appliance
 ######################################
 #Route Tables Routes Associate
 echo "----------------------"
@@ -27,3 +28,4 @@ echo "Running Next ---------"
 echo "Creating Route Associations"
 az network vnet subnet update -n $SubNet --vnet-name $Server_vnet -g $RG_Name --route-table $RT_Name
 # --> Your Code in here
+az network vnet subnet update -n $SubNet --vnet-name $Student_vnet -g $RG_Name --route-table $RT_Name
