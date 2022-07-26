@@ -19,6 +19,7 @@ echo "Creating Route Tables"
 echo "--------------------------------"
 echo 
 # ---> Your Code in here
+source ./rout_tbl_create.sh
 
 echo "--------------------------------"
 echo "Creating DevTest Lab"
