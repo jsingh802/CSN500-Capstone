@@ -19,3 +19,10 @@ Author: jsingh802 <jskrt655@gmail.com>
 Date:   Thu Jul 28 17:50:15 2022 -0400
 
     creates feat-conflict branch
+
+## Discussions and Refections;
+
+I will use the following command to merge the branch 'feat-conflict' to the main so that the changes in both branches remain intact.
+```bash
+git merge feat-conflict
+```
