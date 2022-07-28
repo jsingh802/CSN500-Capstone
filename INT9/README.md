@@ -12,3 +12,10 @@ Author: jsingh802 <jskrt655@gmail.com>
 Date:   Thu Jul 28 17:22:36 2022 -0400
 
     adds INT9 and updates README.md
+## Output of last 'git log -1';
+
+commit 9a21a73f28d8d15a3bb99c46449680f6513b65c4 (HEAD -> feat-conflict, origin/feat-conflict)
+Author: jsingh802 <jskrt655@gmail.com>
+Date:   Thu Jul 28 17:50:15 2022 -0400
+
+    creates feat-conflict branch
